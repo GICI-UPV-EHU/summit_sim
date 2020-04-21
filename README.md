@@ -42,6 +42,11 @@ Download this repository and checkout to "melodic" branch.
 
 Execute Catkin_make in the catkin workspace.
 
+Install the dependencies:
+
+```rosdep install --from-paths src --ignore-src```
+
+
 If gazebo does show the following error:
 ```
 [Err] [REST.cc:205] Error in REST request
