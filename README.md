@@ -37,6 +37,8 @@ Intallation process for ROS-melodic
 - https://github.com/RobotnikAutomation/robotnik_purepursuit_planner
 - https://github.com/RobotnikAutomation/robotnik_msgs
 - https://github.com/ros-drivers/ackermann_msgs
+- https://github.com/RobotnikAutomation/robotnik_sensors.git
+- https://wiki.ros.org/depthimage_to_laserscan (sudo apt install ros-melodic-depthimage_to_laserscan)
 
 Download this repository and checkout to "melodic" branch.
 
