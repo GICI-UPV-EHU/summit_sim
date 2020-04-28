@@ -33,15 +33,23 @@
 
   <!-- Load the URDF into the ROS Parameter Server -->
   <param name="robot_description"
-         command="$(find xacro)/xacro.py '$(find summit_description)/urdf/summit_kinect.urdf.xacro'" />
-  <!--param name="sensor_kinect"
-         command="$(find xacro)/xacro.py '$(find summit_description)/urdf/structures/kinect.urdf.xacro'"-->
+         command="$(find xacro)/xacro --inorder '$(find summit_description)/urdf/summit_kinect.urdf.xacro'" />
+
+  <param name="sensor_kinect"
+         command="$(find xacro)/xacro --inorder '$(find summit_description)/urdf/structures/kinect.urdf.xacro'"/>
 
   <!-- Call a python script to the run a service call to gazebo_ros to spawn a URDF robot -->
   <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
         args="-urdf -model summit -param robot_description"/>
 
   <!-- DepthImage To LaserScan file -->
-  <include file="$(find depthimage_to_laserscan)/launch/di2l.launch" />
+  <node pkg="depthimage_to_laserscan" type="depthimage_to_laserscan" name="depthimage_to_laserscan" args="load depthimage_to_laserscan/DepthImageToLaserScanNodelet">
+    <remap from="camera_info" to="/kinect/depth/camera_info" />
+    <remap from="image" to="/kinect/depth/image_raw" />
+    <remap from="scan" to="/depth_scan" />
+    <param name="scan_height" value="10" />
+    <param name="range_max" value="30" />
+    <param name="output_frame_id" value="camera_depth_frame" />
+  </node>
 
 </launch>
